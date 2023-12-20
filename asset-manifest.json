@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/alexsneshko.github.io/tofi/static/css/main.66483508.css",
+    "main.js": "/alexsneshko.github.io/tofi/static/js/main.de9326a0.js",
+    "index.html": "/alexsneshko.github.io/tofi/index.html",
+    "main.66483508.css.map": "/alexsneshko.github.io/tofi/static/css/main.66483508.css.map",
+    "main.de9326a0.js.map": "/alexsneshko.github.io/tofi/static/js/main.de9326a0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.66483508.css",
+    "static/js/main.de9326a0.js"
+  ]
+}
