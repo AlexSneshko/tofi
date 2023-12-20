@@ -6,7 +6,7 @@ import { createContext, useEffect, useState } from "react";
 export const UserContext = createContext(null)
 
 function App() {
-  const [user, setUser] = useState(localStorage.getItem("user"))
+  const [user, setUser] = useState(null)
 
   // useEffect(() => {
   //   localStorage.setItem("user", JSON.stringify(user));
