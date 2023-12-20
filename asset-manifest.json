@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/tofi/static/css/main.09d8e74e.css",
-    "main.js": "/tofi/static/js/main.aeb15f76.js",
+    "main.js": "/tofi/static/js/main.7694ba40.js",
     "index.html": "/tofi/index.html",
     "main.09d8e74e.css.map": "/tofi/static/css/main.09d8e74e.css.map",
-    "main.aeb15f76.js.map": "/tofi/static/js/main.aeb15f76.js.map"
+    "main.7694ba40.js.map": "/tofi/static/js/main.7694ba40.js.map"
   },
   "entrypoints": [
     "static/css/main.09d8e74e.css",
-    "static/js/main.aeb15f76.js"
+    "static/js/main.7694ba40.js"
   ]
 }
