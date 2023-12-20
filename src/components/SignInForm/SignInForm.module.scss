@@ -1,0 +1,18 @@
+.SignInForm {
+    width: 680px;
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+
+    input {
+        width: 100%;
+    }
+}
+
+.error {
+    border-color: red;
+}

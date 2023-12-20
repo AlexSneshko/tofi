@@ -1,0 +1,31 @@
+.Header {
+  background-color: aqua;
+  padding: 20px;
+
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+
+}
+
+.NavigationLink {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+
+    &:not(.active):hover {
+      color: #55aac9;
+    }
+
+    
+  }
+
+.Navigation {
+    & .active {
+      color: #9ea7a1;
+    }
+}

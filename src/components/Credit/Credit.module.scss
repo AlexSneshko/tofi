@@ -1,0 +1,13 @@
+.credit {
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 20px;
+
+  &.pending {
+    border: 2px dotted rgb(255, 136, 0);
+  }
+
+  &.payed {
+    border: 2px solid green;
+  }
+}

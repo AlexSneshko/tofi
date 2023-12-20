@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { Outlet } from "react-router-dom";
+import { Header } from "./components/Header/Header";
+import "react-toastify/dist/ReactToastify.css";
+import { createContext, useEffect, useState } from "react";
+
+export const UserContext = createContext(null)
 
 function App() {
+  const [user, setUser] = useState(localStorage.getItem("user"))
+
+  // useEffect(() => {
+  //   localStorage.setItem("user", JSON.stringify(user));
+  // }, [user]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <UserContext.Provider value={{user, setUser}}>
+        <Header />
+        <Outlet />
+      </UserContext.Provider>
+    </>
   );
 }
 
