@@ -5,6 +5,7 @@ import { calculateOccurrences } from "../../helpers/calculateOccurrences";
 import { makeAutoTransaction } from "../../api/makeAutoTransaction";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import classNames from "classnames";
 
 export const Transaction = ({ transaction, isAuto }) => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export const Transaction = ({ transaction, isAuto }) => {
   };
 
   return (
-    <div className={styles.transaction}>
+    <div className={classNames(styles.transaction, !isDone && isReady && styles.isActive)}>
       <p>From: {transaction.from.profile_id}</p>
       <p>To: {transaction.to.profile_id}</p>
       <p>Sum: {transaction.sum}</p>
