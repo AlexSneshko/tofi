@@ -14,7 +14,7 @@ export const SignInForm = () =>
       supabaseClient.auth.signInWithOtp({
         email: data.email,
         options: {
-          emailRedirectTo:'/home/'
+          emailRedirectTo:'http://alexsneshko.github.io/tofi/home'
         }
       })
       .then(() => {
