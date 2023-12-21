@@ -7,21 +7,19 @@ import Select from "react-select";
 import { getUserAccounts } from "../../api/getUserAccount";
 import { makeTransaction } from "../../api/makeTransaction";
 import { createAutoTransaction } from "../../api/createAutoTransaction";
+import { formatTo2Digits } from "../../helpers/formatTo2Digits";
 
 export const TransferForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
     control,
   } = useForm({
     defaultValues: { autoTransactionHours: 12, autoTransactionMinutes: 0 },
   });
   const [accountsList, setAccountsList] = useState([]);
   const [isAutoTransaction, setIsAutoTransaction] = useState(false);
-
-  const formatTo2Digits = (number) => (number > 9 ? number : `0${number}`);
 
   const onSubmit = (data) => {
     //750c3e9e-5b76-46d4-bc21-ab2b5157c0e7
@@ -54,18 +52,11 @@ export const TransferForm = () => {
       }).catch(() => {
         toast.error("Pleace check recipient id");
       });
-
-      // console.log(error)
-      // if (error) {
-      //   toast.error("Pleace check recipient id");
-      // } else {
-      //   toast.success("transaction created successfull");
-      // }
     }
   };
 
   const onFormError = (data) => {
-    toast.error("(((");
+    toast.error("Check your form data");
     console.log(data);
   };
 

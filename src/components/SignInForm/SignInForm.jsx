@@ -14,7 +14,7 @@ export const SignInForm = () =>
       supabaseClient.auth.signInWithOtp({
         email: data.email,
         options: {
-          emailRedirectTo:'http://alexsneshko.github.io/tofi/home'
+          emailRedirectTo:'https://online-bank-wim7.onrender.com/home/'
         }
       })
       .then(() => {
@@ -26,7 +26,7 @@ export const SignInForm = () =>
   }
 
   const onFormError = (data) => {
-    toast.error('(((')
+    toast.error('Check your form')
   }
 
   return (

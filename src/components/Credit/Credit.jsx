@@ -5,21 +5,7 @@ import { payForCredit } from "../../api/payForCredit";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
-
-const getLastDate = (date, yearToAdd) => {
-  const res = new Date(date);
-
-  console.log(res)
-
-  res.setFullYear(res.getFullYear() + yearToAdd);
-
-  console.log(res)
-
-  if (new Date().getTime() < res.getTime())
-
-
-  return res;
-};
+import { getLastDate } from "../../helpers/getLastDate";
 
 export const Credit = ({ credit }) => {
   const navigte = useNavigate();
@@ -28,9 +14,6 @@ export const Credit = ({ credit }) => {
   const isPending =
     !isPayed &&
     (new Date().getTime() < getLastDate(new Date(credit.created_at), credit.term_year).getTime());
-
-  console.log(isPayed);
-  console.log(isPending);
 
   const onCreditPay = () => {
     let newSumToPay = credit.total_sum / credit.term_year / 12;
@@ -65,7 +48,7 @@ export const Credit = ({ credit }) => {
       <p>Sum: {credit.sum}</p>
       <p>Total sum: {credit.total_sum}</p>
       <p>Create at: {credit.created_at}</p>
-      <Button text="Pay" onClick={onCreditPay} />
+      {!isPayed && <Button text="Pay" onClick={onCreditPay} />}
     </div>
   );
 };

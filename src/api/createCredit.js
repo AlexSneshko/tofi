@@ -20,8 +20,6 @@ export const createCredit = async (
     total_sum,
   });
 
-  console.log(error);
-
   if (error) throw Error(error);
 
   return data;

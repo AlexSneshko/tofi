@@ -7,15 +7,6 @@ export const CreditsList = () => {
   const [credits, setCredits] = useState([]);
 
   useEffect(() => {
-    // if (isAutoTransactions) {
-    //   getAllAutoTransactions().then((res) => {
-    //     setTransactions(res);
-    //   });
-    // } else {
-    //   getAllTransactions().then((res) => {
-    //     setTransactions(res);
-    //   });
-    // }
     getAllCredits().then((res) => {
       setCredits(res)
     })

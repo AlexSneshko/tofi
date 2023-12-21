@@ -1,0 +1,1 @@
+export const formatTo2Digits = (number) => (number > 9 ? number : `0${number}`);

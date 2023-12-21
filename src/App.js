@@ -6,11 +6,11 @@ import { createContext, useEffect, useState } from "react";
 export const UserContext = createContext(null)
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(localStorage.getItem("user"))
 
-  // useEffect(() => {
-  //   localStorage.setItem("user", JSON.stringify(user));
-  // }, [user]);
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   return (
     <>

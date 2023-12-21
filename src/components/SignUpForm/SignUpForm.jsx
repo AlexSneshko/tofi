@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Button } from "../ui/Button/Button";
 import { supabaseClient } from "../../config/supabase";
-// import { supabaseClient } from "../../config/supabase";
 
 export const SignUpForm = () => {
   const {
@@ -17,12 +16,12 @@ export const SignUpForm = () => {
 
   const onSubmit = (data) => {
     supabaseClient.auth.signUp({
-      email: '007alex03@gmail.com',
-      password: 'good password 123',
+      email: data.email,
+      password: data.password,
       options: {
         data: {
-          name: 'alex',
-          surname: 'alexxx',
+          name: data.name,
+          surname: data.surname,
         }
       }
     })
@@ -38,27 +37,10 @@ export const SignUpForm = () => {
     })
   };
 
-  const loadData = async () => {
-    // let { data, error } = await supabaseClient
-    //   .from("roles")
-    //   .select("*");
-    // console.log(data);
-  };
 
   const onFormError = (data) => {
-    toast.error("(((");
+    toast.error("Check your form");
   };
-
-  // const load = supabaseClient
-
-  // useEffect(() => {
-  //   const res = supabaseClient.from('roles').select('*')
-  //   console.log(res)
-  // }, [])
-
-  useEffect(() => {
-    loadData();
-  }, []);
 
   return (
     <>

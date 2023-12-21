@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { Button } from "../ui/Button/Button";
 import Select from "react-select";
 import { createCredit } from "../../api/createCredit";
+import { countMonthlyPaymentAmount } from "../../helpers/countMonthlyPaymentAmount";
 
 const CREDIT_MAX_YEARS_COUNT = 5;
 
@@ -43,9 +44,7 @@ export const CreateCreditForm = () => {
   const countTotalSum = (creditTerm) => (result * creditTerm * 12).toFixed(2);
 
   const onSubmit = (data) => {
-    // console.log(data);
     const totalSum = countTotalSum(data.creditTerm.value)
-    // console.log(data.creditType.value, data.amount, data.creditTerm, data.creditYearPercentage, totalSum)
     createCredit(data.creditType.value, data.amount, data.creditTerm.value, data.creditYearPercentage, totalSum).then(() => {
       toast.success('Created successfully')
     }).catch(() => {
@@ -57,30 +56,8 @@ export const CreateCreditForm = () => {
     toast.error("(((");
     console.log(data);
   };
-
-
-
-  // const countCreditMonthPercentage = (creditYearPercentage) => creditYearPercentage / 12;
-
-  const countMonthlyPaymentAmount = (amount, creditYearPercentage, yearCount) => {
-    const monthPercentage = creditYearPercentage / 12 / 100;
-
-    return amount * monthPercentage / (1 - Math.pow(1 + monthPercentage, -yearCount * 12 ))
-  }
-
-  // const a = useCallback(getValues())
-
-
-  // useEffect(() => {
-  //   // setFormData(getValues());
-  //   setResult(getValues(['amount', 'creditTerm', 'creditType', 'creditYearPercentage']))
-  //   console.log(getValues('amount'))
-  //   // console.log(getValues())
-  //   // setResult(getValues('amount'), getValues('creditYearPercentage'), getValues('creditTerm'))
-  // }, [getValues()]);
+  
   useEffect(() => {
-    // setResult(countMonthlyPaymentAmount(watchedValues.amount, watchedValues.creditYearPercentage, watchedValues.creditTerm.value))
-    // console.log(watchedValues.amount, watchedValues.creditYearPercentage, watchedValues.creditTerm.value)
     setResult(countMonthlyPaymentAmount(watchedValues.amount, watchedValues.creditYearPercentage, watchedValues.creditTerm.value).toFixed(2))
   }, [watchedValues])
 
@@ -109,7 +86,6 @@ export const CreateCreditForm = () => {
             name="creditTerm"
             control={control}
             rules={{ required: true }}
-            // defaultValue={accountsListOptions[0]}
             render={({ field }) => (
               <Select {...field} options={accountsListOptions} />
             )}
@@ -121,7 +97,6 @@ export const CreateCreditForm = () => {
             name="creditType"
             control={control}
             rules={{ required: true }}
-            // defaultValue={creditListOprions[0]}
             render={({ field }) => (
               <Select {...field} options={creditListOprions} />
             )}
