@@ -23,43 +23,76 @@ const creditListOprions = [
   { label: "Differentiated", value: "differentiated" },
 ];
 
+const ANNUAL_RATE = {
+  1: 11,
+  2: 12,
+  3: 13,
+  4: 14,
+  5: 15,
+};
+
 export const CreateCreditForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
     control,
-    getValues,
-    watch
-  } = useForm({defaultValues:{
-    'creditTerm': accountsListOptions[0],
-    'creditType': creditListOprions[0],
-    'creditYearPercentage': 12
-  }});
+    watch,
+  } = useForm({
+    defaultValues: {
+      creditTerm: accountsListOptions[0],
+      creditType: creditListOprions[0],
+      creditYearPercentage: 12,
+    },
+  });
 
-  const [result, setResult] = useState()
+  const [result, setResult] = useState();
+  const [selectedPercentage, setSelectedPercentage] = useState(ANNUAL_RATE[1]);
   const watchedValues = watch();
 
-  const countTotalSum = (creditTerm) => (result * creditTerm * 12).toFixed(2);
+  // console.log(watchedValues.amount)
+
+  const countTotalSum = (creditTerm) =>
+    watchedValues.amount ? (result * creditTerm * 12).toFixed(2) : 0;
+
+  console.log(countTotalSum(watchedValues.creditTerm.value));
 
   const onSubmit = (data) => {
-    const totalSum = countTotalSum(data.creditTerm.value)
-    createCredit(data.creditType.value, data.amount, data.creditTerm.value, data.creditYearPercentage, totalSum).then(() => {
-      toast.success('Created successfully')
-    }).catch(() => {
-      toast.error('Smth went wrong')
-    })
+    const totalSum = countTotalSum(data.creditTerm.value);
+    createCredit(
+      data.creditType.value,
+      data.amount,
+      data.creditTerm.value,
+      data.creditYearPercentage,
+      totalSum
+    )
+      .then(() => {
+        toast.success("Created successfully");
+      })
+      .catch(() => {
+        toast.error("Smth went wrong");
+      });
   };
 
   const onFormError = (data) => {
     toast.error("(((");
     console.log(data);
   };
-  
+
+  const onCreditTermChange = (selectedTerm) => {
+    console.log(selectedTerm);
+    setSelectedPercentage(ANNUAL_RATE[selectedTerm.value]);
+  };
+
   useEffect(() => {
-    setResult(countMonthlyPaymentAmount(watchedValues.amount, watchedValues.creditYearPercentage, watchedValues.creditTerm.value).toFixed(2))
-  }, [watchedValues])
+    const monthlyPaymentAmount = countMonthlyPaymentAmount(
+      watchedValues.amount,
+      selectedPercentage,
+      watchedValues.creditTerm.value
+    ).toFixed(2);
+
+    setResult(monthlyPaymentAmount || 0);
+  }, [watchedValues]);
 
   return (
     <>
@@ -87,7 +120,11 @@ export const CreateCreditForm = () => {
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <Select {...field} options={accountsListOptions} />
+              <Select
+                {...field}
+                options={accountsListOptions}
+                // onChange={onCreditTermChange}
+              />
             )}
           />
         </div>
@@ -103,21 +140,15 @@ export const CreateCreditForm = () => {
           />
         </div>
         <div>
-          <h3>Percentage rate</h3>
-          <input
-            className={errors.amount && styles.error}
-            placeholder="Percentage year rate"
-            {...register("creditYearPercentage", {
-              required: true,
-              valueAsNumber: true,
-              validate: (value) => value > 0 && value < 100,
-            })}
-          />
+          <h3>Percentage rate: {selectedPercentage}</h3>
         </div>
-
-        <h2>Monthly payment: {result}</h2>
-        <h2>Total payment: {countTotalSum(watchedValues.creditTerm.value)}</h2>
-        <Button text={"Transfer"} type='submit' />
+        <div>
+          <h2>Monthly payment: {result}</h2>
+          <h2>
+            Total payment: {countTotalSum(watchedValues.creditTerm.value)}
+          </h2>
+        </div>
+        <Button text={"Transfer"} type="submit" />
       </form>
     </>
   );
