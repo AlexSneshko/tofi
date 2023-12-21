@@ -14,7 +14,7 @@ export const SignInForm = () =>
       supabaseClient.auth.signInWithOtp({
         email: data.email,
         options: {
-          emailRedirectTo:'https://online-bank-wim7.onrender.com/home/'
+          emailRedirectTo:'/home/'
         }
       })
       .then(() => {
